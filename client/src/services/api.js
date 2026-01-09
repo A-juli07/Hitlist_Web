@@ -10,7 +10,7 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
-      config.headers.Authorization = \`Bearer \${token}\`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -21,28 +21,28 @@ api.interceptors.request.use(
 
 export const animeService = {
   getAll: (params) => api.get('/animes', { params }),
-  getById: (id) => api.get(\`/animes/\${id}\`),
-  getByCategory: (category) => api.get(\`/animes/category/\${category}\`),
+  getById: (id) => api.get(`/animes/${id}`),
+  getByCategory: (category) => api.get(`/animes/category/${category}`),
   getTopRated: () => api.get('/animes/top/rated'),
   create: (data) => api.post('/animes', data),
-  update: (id, data) => api.put(\`/animes/\${id}\`, data),
-  delete: (id) => api.delete(\`/animes/\${id}\`),
+  update: (id, data) => api.put(`/animes/${id}`, data),
+  delete: (id) => api.delete(`/animes/${id}`),
 };
 
 export const ratingService = {
   create: (animeId, rating) => api.post('/ratings', { animeId, rating }),
-  getUserRating: (animeId) => api.get(\`/ratings/anime/\${animeId}\`),
-  getAll: (animeId) => api.get(\`/ratings/anime/\${animeId}/all\`),
-  delete: (id) => api.delete(\`/ratings/\${id}\`),
+  getUserRating: (animeId) => api.get(`/ratings/anime/${animeId}`),
+  getAll: (animeId) => api.get(`/ratings/anime/${animeId}/all`),
+  delete: (id) => api.delete(`/ratings/${id}`),
 };
 
 export const commentService = {
-  getByAnime: (animeId) => api.get(\`/comments/anime/\${animeId}\`),
+  getByAnime: (animeId) => api.get(`/comments/anime/${animeId}`),
   create: (animeId, content, parentCommentId = null) =>
     api.post('/comments', { animeId, content, parentCommentId }),
-  update: (id, content) => api.put(\`/comments/\${id}\`, { content }),
-  delete: (id) => api.delete(\`/comments/\${id}\`),
-  toggleLike: (id) => api.post(\`/comments/\${id}/like\`),
+  update: (id, content) => api.put(`/comments/${id}`, { content }),
+  delete: (id) => api.delete(`/comments/${id}`),
+  toggleLike: (id) => api.post(`/comments/${id}/like`),
 };
 
 export const authService = {
