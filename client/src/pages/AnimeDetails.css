@@ -1,0 +1,277 @@
+.anime-details {
+  min-height: 100vh;
+}
+
+.anime-header {
+  position: relative;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+.anime-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 15, 30, 0.7),
+    rgba(15, 15, 30, 0.95)
+  );
+  backdrop-filter: blur(5px);
+}
+
+.anime-header-content {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.anime-poster {
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 3px solid var(--orange-primary);
+}
+
+.anime-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.anime-title {
+  font-size: 42px;
+  font-weight: 900;
+  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.anime-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.em-lançamento {
+  background: var(--blue-primary);
+  color: white;
+}
+
+.finalizado {
+  background: var(--success);
+  color: white;
+}
+
+.em-breve {
+  background: var(--warning);
+  color: var(--bg-primary);
+}
+
+.anime-rating-section {
+  background: rgba(30, 40, 65, 0.8);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rating-number {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--orange-primary);
+}
+
+.rating-count {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.user-rating {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-rating p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.anime-content {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 40px;
+}
+
+.content-main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.content-main h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.anime-description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.comments-section {
+  margin-top: 40px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.comment-form textarea {
+  resize: vertical;
+}
+
+.login-prompt {
+  text-align: center;
+  padding: 20px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.info-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--orange-primary);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+.genres {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .anime-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .anime-header {
+    height: auto;
+    min-height: 400px;
+  }
+
+  .anime-header-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .anime-poster {
+    width: 200px;
+    height: 280px;
+  }
+
+  .anime-title {
+    font-size: 28px;
+  }
+
+  .anime-rating-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rating-number {
+    font-size: 36px;
+  }
+
+  .admin-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+}

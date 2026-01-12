@@ -1,0 +1,139 @@
+.carousel-section {
+  margin-bottom: 60px;
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.carousel-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.carousel-icon {
+  font-size: 32px;
+}
+
+.carousel-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carousel-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.view-all-link {
+  color: var(--orange-primary);
+  font-weight: 600;
+  font-size: 16px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.view-all-link:hover {
+  color: var(--orange-secondary);
+  transform: translateX(4px);
+}
+
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding: 8px 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 calc((100% - 60px) / 4);
+  min-width: calc((100% - 60px) / 4);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(26, 26, 46, 0.95);
+  border: 2px solid var(--orange-primary);
+  color: var(--orange-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 10;
+  font-size: 24px;
+}
+
+.carousel-btn:hover {
+  background: var(--orange-primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn-left {
+  left: 0;
+}
+
+.carousel-btn-right {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    gap: 12px;
+  }
+
+  .carousel-item {
+    flex: 0 0 calc((100% - 12px) / 2);
+    min-width: calc((100% - 12px) / 2);
+  }
+
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .carousel-btn-left {
+    left: 0;
+  }
+
+  .carousel-btn-right {
+    right: 0;
+  }
+
+  .carousel-title {
+    font-size: 22px;
+  }
+
+  .carousel-subtitle {
+    font-size: 12px;
+  }
+}

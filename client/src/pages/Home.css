@@ -1,0 +1,173 @@
+.home {
+  min-height: 100vh;
+}
+
+.hero {
+  background: url('/hero-bg.jpg') center/cover no-repeat;
+  padding: 120px 0;
+  text-align: center;
+  border-bottom: 2px solid var(--orange-primary);
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 15, 30, 0.85) 0%,
+    rgba(26, 26, 46, 0.9) 80%
+  );
+  z-index: 0;
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 56px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-subtitle {
+  font-size: 22px;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.search-bar {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  background: var(--bg-card);
+  padding: 8px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px;
+}
+
+.search-icon {
+  color: var(--text-muted);
+  font-size: 24px;
+  margin: auto 12px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-icon {
+  font-size: 36px;
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.category-btn {
+  padding: 10px 20px;
+  background: var(--bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  border-color: var(--orange-primary);
+  color: var(--orange-primary);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+  color: white;
+  border-color: transparent;
+}
+
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 80px 0;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .anime-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .categories {
+    gap: 8px;
+  }
+
+  .category-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

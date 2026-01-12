@@ -1,0 +1,250 @@
+.comment {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.comment:hover {
+  border-left-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment.collapsed {
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  opacity: 0.7;
+}
+
+.comment.collapsed:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.comment-reply {
+  margin-top: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-left-color: rgba(255, 107, 53, 0.3);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.comment.collapsed .comment-header {
+  margin-bottom: 0;
+}
+
+/* Botão de colapsar/expandir */
+.btn-collapse {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+}
+
+.btn-collapse:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary);
+}
+
+.btn-collapse svg {
+  width: 14px;
+  height: 14px;
+}
+
+.comment-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.comment-reply .comment-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.comment-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.replies-count {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.comment-content {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  color: var(--text-primary);
+  word-wrap: break-word;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.btn-like,
+.btn-reply {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-like:hover,
+.btn-reply:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary);
+}
+
+.btn-like.liked {
+  color: #e74c3c;
+}
+
+.btn-like.liked svg {
+  fill: #e74c3c;
+}
+
+.btn-delete {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+/* Reply Form Styles */
+.reply-form {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reply-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.2s ease;
+}
+
+.reply-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.reply-form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.reply-form-actions .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Nested Replies Container */
+.comment-replies {
+  margin-top: 1rem;
+  padding-left: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .comment {
+    padding: 1rem;
+  }
+
+  .comment-reply {
+    margin-left: 0 !important;
+    padding-left: 1rem;
+    border-left-width: 2px;
+  }
+
+  .comment-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .comment-reply .comment-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .comment-author {
+    font-size: 0.9rem;
+  }
+
+  .comment-date {
+    font-size: 0.75rem;
+  }
+
+  .comment-content {
+    font-size: 0.9rem;
+  }
+
+  .btn-like,
+  .btn-reply {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.6rem;
+  }
+}

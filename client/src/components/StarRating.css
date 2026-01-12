@@ -1,0 +1,16 @@
+.star-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  transition: var(--transition);
+}
+
+.star.filled {
+  filter: drop-shadow(0 0 8px var(--orange-primary));
+}
+
+.star:hover:not([style*="cursor: default"]) {
+  transform: scale(1.2);
+}

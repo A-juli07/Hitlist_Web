@@ -1,0 +1,168 @@
+import { useState, useEffect } from 'react';
+import { animeService } from '../services/api';
+import AnimeCard from '../components/AnimeCard';
+import Loading from '../components/Loading';
+import { FiSearch } from 'react-icons/fi';
+import './Home.css';
+
+const categories = [
+  'all',
+  'Ação',
+  'Romance',
+  'Comédia',
+  'Drama',
+  'Fantasia',
+  'Ficção Científica',
+  'Terror',
+  'Slice of Life',
+  'Esporte',
+  'Aventura'
+];
+
+const Home = () => {
+  const [animes, setAnimes] = useState([]);
+  const [topAnimes, setTopAnimes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    fetchAnimes();
+    fetchTopAnimes();
+  }, [selectedCategory]);
+
+  const fetchAnimes = async () => {
+    try {
+      setLoading(true);
+      const params = {
+        category: selectedCategory,
+        sort: 'newest',
+        limit: 20
+      };
+
+      const { data } = await animeService.getAll(params);
+      setAnimes(data.animes);
+    } catch (error) {
+      console.error('Erro ao buscar animes:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchTopAnimes = async () => {
+    try {
+      const { data } = await animeService.getTopRated();
+      setTopAnimes(data);
+    } catch (error) {
+      console.error('Erro ao buscar top animes:', error);
+    }
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) {
+      fetchAnimes();
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const { data } = await animeService.getAll({ search: searchTerm });
+      setAnimes(data.animes);
+    } catch (error) {
+      console.error('Erro ao buscar:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="home">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="container">
+          <h1 className="hero-title">
+            Descubra e Avalie seus <span className="highlight">Animes Favoritos</span>
+          </h1>
+          <p className="hero-subtitle">
+            Explore uma vasta coleção de animes e compartilhe suas opiniões com a comunidade
+          </p>
+
+          {/* Search Bar */}
+          <form className="search-bar" onSubmit={handleSearch}>
+            <FiSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Buscar animes..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button type="submit" className="btn btn-primary">
+              Buscar
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Top Animes Section */}
+      {topAnimes.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <h2 className="section-title">
+              <span className="title-icon">🏆</span>
+              Top Animes
+            </h2>
+            <div className="anime-grid">
+              {topAnimes.slice(0, 4).map((anime) => (
+                <AnimeCard key={anime._id} anime={anime} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Categories */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Categorias</h2>
+          <div className="categories">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category === 'all' ? 'Todos' : category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All Animes Section */}
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">
+            {selectedCategory === 'all' ? 'Todos os Animes' : selectedCategory}
+          </h2>
+
+          {loading ? (
+            <Loading />
+          ) : animes.length === 0 ? (
+            <div className="no-results">
+              <p>Nenhum anime encontrado.</p>
+            </div>
+          ) : (
+            <div className="anime-grid">
+              {animes.map((anime) => (
+                <AnimeCard key={anime._id} anime={anime} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
