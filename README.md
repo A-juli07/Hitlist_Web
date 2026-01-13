@@ -75,16 +75,7 @@ npm install
 npm run dev
 ```
 
-## 🌐 URLs
-- Frontend: http://localhost:3000
-- Backend: http://localhost:5000
-
-## 👤 Credenciais de Teste
-Após popular o banco de dados, você pode usar:
-- **Admin**: admin@anime.com / admin123
-- **Usuário**: user@anime.com / user123
-
-## 👥 Desenvolvedores
+## Desenvolvedores
 
 - [@A-juli07](https://github.com/A-juli07)
 - [@Wanderson-Morais](https://github.com/Wanderson-Morais)
