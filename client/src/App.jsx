@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import AnimeDetails from './pages/AnimeDetails';
 import AnimeForm from './pages/AnimeForm';
 import CategoryPage from './pages/CategoryPage';
+import Profile from './pages/Profile';
 import './styles/global.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/anime/:id" element={<AnimeDetails />} />
           <Route path="/admin/animes/new" element={<AnimeForm />} />
           <Route path="/admin/animes/:id/edit" element={<AnimeForm />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </AuthProvider>
