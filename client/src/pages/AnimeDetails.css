@@ -250,6 +250,7 @@
     align-items: center;
     text-align: center;
     padding-top: 40px;
+    gap: 20px;
   }
 
   .anime-poster {
@@ -257,21 +258,56 @@
     height: 280px;
   }
 
+  .anime-info {
+    width: 100%;
+    gap: 16px;
+  }
+
   .anime-title {
     font-size: 28px;
   }
 
+  .anime-meta {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .meta-item {
+    font-size: 14px;
+  }
+
   .anime-rating-section {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    padding: 16px;
+  }
+
+  .rating-display {
+    flex-direction: column;
+    gap: 8px;
   }
 
   .rating-number {
     font-size: 36px;
   }
 
+  .user-rating {
+    width: 100%;
+    align-items: center;
+  }
+
   .admin-actions {
     width: 100%;
     flex-direction: column;
+  }
+
+  .content-main h2 {
+    font-size: 24px;
+  }
+
+  .anime-description {
+    font-size: 15px;
   }
 }
