@@ -67,9 +67,10 @@ const Home = () => {
 
     try {
       const { data } = await animeService.getAll({ search: searchTerm });
-      setSearchResults(data.animes);
+      setSearchResults(data);
     } catch (error) {
       console.error('Erro ao buscar:', error);
+      setSearchResults([]);
     }
   };
 
