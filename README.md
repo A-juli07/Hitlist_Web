@@ -19,7 +19,7 @@ Sistema completo de avaliação e discussão de animes.
 - Deletar animes
 - Moderação de comentários
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 ### Backend
 - Node.js + Express
@@ -86,9 +86,6 @@ Após popular o banco de dados, você pode usar:
 
 ## 👥 Desenvolvedores
 
-- [@A-juli07](https://github.com/A-juli07) - Backend & Arquitetura
-- [@Wanderson-Morais](https://github.com/Wanderson-Morais) - Frontend & UX
+- [@A-juli07](https://github.com/A-juli07)
+- [@Wanderson-Morais](https://github.com/Wanderson-Morais)
 
-## 📄 Licença
-
-MIT License - veja o arquivo LICENSE para detalhes.
