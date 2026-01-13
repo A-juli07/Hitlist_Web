@@ -5,6 +5,7 @@ import connectDB from './config/database.js';
 import authRoutes from './routes/authRoutes.js';
 import animeRoutes from './routes/animeRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
+import ratingRoutes from './routes/ratingRoutes.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/animes', animeRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/ratings', ratingRoutes);
 
 // Middleware de erro
 app.use((err, req, res, next) => {
