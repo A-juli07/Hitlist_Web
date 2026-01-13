@@ -242,7 +242,8 @@
 @media (max-width: 768px) {
   .anime-header {
     height: auto;
-    min-height: 400px;
+    min-height: 650px;
+    margin-bottom: 0;
   }
 
   .anime-header-content {
@@ -250,6 +251,7 @@
     align-items: center;
     text-align: center;
     padding-top: 40px;
+    padding-bottom: 60px;
     gap: 20px;
   }
 
@@ -309,5 +311,14 @@
 
   .anime-description {
     font-size: 15px;
+  }
+
+  .anime-details .section {
+    margin-top: 0;
+    padding-top: 40px;
+  }
+
+  .anime-content {
+    padding-top: 20px;
   }
 }
