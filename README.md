@@ -48,6 +48,7 @@ npm install
 # Criar arquivo .env baseado no .env.example
 cp .env.example .env
 # Edite o .env e configure suas variáveis de ambiente
+# Deve gerar uma chave secreta jwt
 ```
 
 ### Passo 2: Popular o Banco de Dados (Opcional)
