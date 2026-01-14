@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { animeService } from '../services/api';
+import { animeService, animeRequestService } from '../services/api';
 import './AnimeForm.css';
 
 const categories = [
@@ -21,6 +21,7 @@ const AnimeForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
+  const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
     title: '',
@@ -45,8 +46,17 @@ const AnimeForm = () => {
 
     if (id) {
       fetchAnime();
+    } else {
+      // Preencher o título se vier de uma solicitação
+      const animeName = searchParams.get('animeName');
+      if (animeName) {
+        setFormData(prev => ({
+          ...prev,
+          title: decodeURIComponent(animeName)
+        }));
+      }
     }
-  }, [id, isAdmin]);
+  }, [id, isAdmin, searchParams]);
 
   const fetchAnime = async () => {
     try {
@@ -86,6 +96,16 @@ const AnimeForm = () => {
         await animeService.update(id, data);
       } else {
         await animeService.create(data);
+
+        // Se veio de uma solicitação, marcar como adicionada
+        const requestId = searchParams.get('requestId');
+        if (requestId) {
+          try {
+            await animeRequestService.updateStatus(requestId, 'added');
+          } catch (error) {
+            console.error('Erro ao atualizar status da solicitação:', error);
+          }
+        }
       }
 
       navigate('/');

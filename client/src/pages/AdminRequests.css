@@ -265,6 +265,17 @@
   justify-content: center;
 }
 
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--orange-secondary), #e65100);
+  transform: translateY(-2px);
+}
+
 .btn-success {
   background: linear-gradient(135deg, #22c55e, #16a34a);
   color: white;

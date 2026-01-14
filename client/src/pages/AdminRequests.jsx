@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { animeRequestService } from '../services/api';
 import Loading from '../components/Loading';
-import { FiAlertCircle, FiCheck, FiX, FiTrash2, FiClock } from 'react-icons/fi';
+import { FiAlertCircle, FiCheck, FiX, FiTrash2, FiClock, FiPlusCircle } from 'react-icons/fi';
 import './AdminRequests.css';
 
 const AdminRequests = () => {
+  const navigate = useNavigate();
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
@@ -191,13 +193,22 @@ const AdminRequests = () => {
                     </>
                   )}
                   {request.status === 'approved' && (
-                    <button
-                      onClick={() => handleUpdateStatus(request._id, 'added')}
-                      className="btn btn-info btn-sm"
-                      title="Marcar como adicionado"
-                    >
-                      <FiCheck /> Marcar como Adicionado
-                    </button>
+                    <>
+                      <button
+                        onClick={() => navigate(`/admin/animes/new?requestId=${request._id}&animeName=${encodeURIComponent(request.animeName)}`)}
+                        className="btn btn-primary btn-sm"
+                        title="Adicionar anime"
+                      >
+                        <FiPlusCircle /> Adicionar Anime
+                      </button>
+                      <button
+                        onClick={() => handleUpdateStatus(request._id, 'added')}
+                        className="btn btn-info btn-sm"
+                        title="Marcar como adicionado"
+                      >
+                        <FiCheck /> Já Adicionado
+                      </button>
+                    </>
                   )}
                   <button
                     onClick={() => handleDelete(request._id)}
