@@ -1,22 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiLogOut, FiHome, FiPlusCircle, FiGrid, FiChevronDown, FiBell, FiMenu, FiX } from 'react-icons/fi';
+import { FiUser, FiLogOut, FiHome, FiPlusCircle, FiGrid, FiChevronDown, FiBell, FiMenu, FiX, FiFolder } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
-import { animeRequestService } from '../services/api';
+import { animeRequestService, categoryService } from '../services/api';
 import './Navbar.css';
-
-const categories = [
-  'Ação',
-  'Romance',
-  'Comédia',
-  'Drama',
-  'Fantasia',
-  'Ficção Científica',
-  'Terror',
-  'Slice of Life',
-  'Esporte',
-  'Aventura'
-];
 
 const Navbar = () => {
   const { user, logout, isAdmin } = useAuth();
@@ -24,8 +11,11 @@ const Navbar = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    fetchCategories();
+
     if (isAdmin) {
       fetchPendingRequests();
       // Atualizar contador a cada 30 segundos
@@ -33,6 +23,15 @@ const Navbar = () => {
       return () => clearInterval(interval);
     }
   }, [isAdmin]);
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await categoryService.getAll({ active: true });
+      setCategories(data);
+    } catch (error) {
+      console.error('Erro ao buscar categorias:', error);
+    }
+  };
 
   const fetchPendingRequests = async () => {
     try {
@@ -87,19 +86,23 @@ const Navbar = () => {
                   onClick={() => setShowCategories(false)}
                 />
                 <div className="dropdown-menu">
-                  {categories.map((category) => (
-                    <Link
-                      key={category}
-                      to={`/category/${category}`}
-                      className="dropdown-item"
-                      onClick={() => {
-                        setShowCategories(false);
-                        setShowMobileMenu(false);
-                      }}
-                    >
-                      {category}
-                    </Link>
-                  ))}
+                  {categories.length === 0 ? (
+                    <div className="dropdown-item disabled">Carregando...</div>
+                  ) : (
+                    categories.map((category) => (
+                      <Link
+                        key={category._id}
+                        to={`/category/${category.name}`}
+                        className="dropdown-item"
+                        onClick={() => {
+                          setShowCategories(false);
+                          setShowMobileMenu(false);
+                        }}
+                      >
+                        {category.name}
+                      </Link>
+                    ))
+                  )}
                 </div>
               </>
             )}
@@ -111,6 +114,9 @@ const Navbar = () => {
                 <>
                   <Link to="/admin/animes/new" className="nav-link" onClick={() => setShowMobileMenu(false)}>
                     <FiPlusCircle /> <span>Adicionar Anime</span>
+                  </Link>
+                  <Link to="/admin/categories" className="nav-link" onClick={() => setShowMobileMenu(false)}>
+                    <FiFolder /> <span>Categorias</span>
                   </Link>
                   <Link to="/admin/requests" className="nav-link notification-link" onClick={() => setShowMobileMenu(false)}>
                     <FiBell /> <span>Solicitações</span>

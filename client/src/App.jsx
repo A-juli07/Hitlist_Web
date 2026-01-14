@@ -10,6 +10,7 @@ import AnimeForm from './pages/AnimeForm';
 import CategoryPage from './pages/CategoryPage';
 import Profile from './pages/Profile';
 import AdminRequests from './pages/AdminRequests';
+import CategoryManagement from './pages/CategoryManagement';
 import './styles/global.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/admin/animes/new" element={<AnimeForm />} />
           <Route path="/admin/animes/:id/edit" element={<AnimeForm />} />
           <Route path="/admin/requests" element={<AdminRequests />} />
+          <Route path="/admin/categories" element={<CategoryManagement />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />

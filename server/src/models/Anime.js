@@ -18,7 +18,7 @@ const animeSchema = new mongoose.Schema({
   category: {
     type: String,
     required: [true, 'Categoria é obrigatória'],
-    enum: ['Ação', 'Romance', 'Comédia', 'Drama', 'Fantasia', 'Ficção Científica', 'Terror', 'Slice of Life', 'Esporte', 'Aventura']
+    trim: true
   },
   genres: [{
     type: String

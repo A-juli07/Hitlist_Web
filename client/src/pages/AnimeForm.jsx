@@ -1,23 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { animeService, animeRequestService } from '../services/api';
+import { animeService, animeRequestService, categoryService } from '../services/api';
 import { useToast } from '../hooks/useToast';
 import Toast from '../components/Toast';
 import './AnimeForm.css';
-
-const categories = [
-  'Ação',
-  'Romance',
-  'Comédia',
-  'Drama',
-  'Fantasia',
-  'Ficção Científica',
-  'Terror',
-  'Slice of Life',
-  'Esporte',
-  'Aventura'
-];
 
 const AnimeForm = () => {
   const { id } = useParams();
@@ -26,11 +13,12 @@ const AnimeForm = () => {
   const [searchParams] = useSearchParams();
   const { toasts, hideToast, success, error: showError } = useToast();
 
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     image: '',
-    category: 'Ação',
+    category: '',
     genres: '',
     episodes: 0,
     status: 'Em Lançamento',
@@ -47,6 +35,8 @@ const AnimeForm = () => {
       return;
     }
 
+    fetchCategories();
+
     if (id) {
       fetchAnime();
     } else {
@@ -60,6 +50,19 @@ const AnimeForm = () => {
       }
     }
   }, [id, isAdmin, searchParams]);
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await categoryService.getAll({ active: true });
+      setCategories(data);
+      // Definir categoria padrão se não houver
+      if (data.length > 0 && !formData.category) {
+        setFormData(prev => ({ ...prev, category: data[0].name }));
+      }
+    } catch (error) {
+      console.error('Erro ao buscar categorias:', error);
+    }
+  };
 
   const fetchAnime = async () => {
     try {
@@ -168,11 +171,15 @@ const AnimeForm = () => {
                 onChange={handleChange}
                 required
               >
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
+                {categories.length === 0 ? (
+                  <option value="">Carregando categorias...</option>
+                ) : (
+                  categories.map((cat) => (
+                    <option key={cat._id} value={cat.name}>
+                      {cat.name}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
           </div>

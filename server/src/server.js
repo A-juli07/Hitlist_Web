@@ -7,6 +7,7 @@ import animeRoutes from './routes/animeRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import ratingRoutes from './routes/ratingRoutes.js';
 import animeRequestRoutes from './routes/animeRequestRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use('/api/animes', animeRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/anime-requests', animeRequestRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // Middleware de erro
 app.use((err, req, res, next) => {
