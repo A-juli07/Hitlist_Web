@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { animeService, ratingService, commentService } from '../services/api';
+import { useToast } from '../hooks/useToast';
+import Toast from '../components/Toast';
 import StarRating from '../components/StarRating';
 import Loading from '../components/Loading';
 import Comment from '../components/Comment';
@@ -12,6 +14,7 @@ const AnimeDetails = () => {
   const { id } = useParams();
   const { user, isAdmin } = useAuth();
   const navigate = useNavigate();
+  const { toasts, hideToast, success, error: showError } = useToast();
 
   const [anime, setAnime] = useState(null);
   const [comments, setComments] = useState([]);
@@ -136,10 +139,11 @@ const AnimeDetails = () => {
 
     try {
       await animeService.delete(id);
-      navigate('/');
+      success('Anime deletado com sucesso!');
+      setTimeout(() => navigate('/'), 1500);
     } catch (error) {
       console.error('Erro ao deletar anime:', error);
-      alert('Erro ao deletar anime');
+      showError('Erro ao deletar anime');
     }
   };
 
@@ -147,7 +151,18 @@ const AnimeDetails = () => {
   if (!anime) return <div>Anime não encontrado</div>;
 
   return (
-    <div className="anime-details">
+    <>
+      {toasts.map(toast => (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          type={toast.type}
+          duration={toast.duration}
+          onClose={() => hideToast(toast.id)}
+        />
+      ))}
+
+      <div className="anime-details">
       {/* Header com imagem de fundo */}
       <div className="anime-header" style={{ backgroundImage: `url(${anime.image})` }}>
         <div className="anime-header-overlay">
@@ -274,6 +289,7 @@ const AnimeDetails = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

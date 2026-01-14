@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { animeService, animeRequestService } from '../services/api';
+import { useToast } from '../hooks/useToast';
+import Toast from '../components/Toast';
 import './AnimeForm.css';
 
 const categories = [
@@ -22,6 +24,7 @@ const AnimeForm = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
   const [searchParams] = useSearchParams();
+  const { toasts, hideToast, success, error: showError } = useToast();
 
   const [formData, setFormData] = useState({
     title: '',
@@ -94,8 +97,10 @@ const AnimeForm = () => {
 
       if (id) {
         await animeService.update(id, data);
+        success('Anime atualizado com sucesso!');
       } else {
         await animeService.create(data);
+        success('Anime criado com sucesso!');
 
         // Se veio de uma solicitação, marcar como adicionada
         const requestId = searchParams.get('requestId');
@@ -108,24 +113,37 @@ const AnimeForm = () => {
         }
       }
 
-      navigate('/');
+      setTimeout(() => navigate('/'), 1500);
     } catch (error) {
       console.error('Erro ao salvar anime:', error);
-      setError(error.response?.data?.message || 'Erro ao salvar anime');
+      const errorMessage = error.response?.data?.message || 'Erro ao salvar anime';
+      setError(errorMessage);
+      showError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="anime-form-page">
-      <div className="container">
-        <div className="form-header">
-          <h1>{id ? 'Editar Anime' : 'Adicionar Novo Anime'}</h1>
-          <p>Preencha os campos abaixo para {id ? 'atualizar' : 'adicionar'} o anime</p>
-        </div>
+    <>
+      {toasts.map(toast => (
+        <Toast
+          key={toast.id}
+          message={toast.message}
+          type={toast.type}
+          duration={toast.duration}
+          onClose={() => hideToast(toast.id)}
+        />
+      ))}
 
-        {error && <div className="alert alert-error">{error}</div>}
+      <div className="anime-form-page">
+        <div className="container">
+          <div className="form-header">
+            <h1>{id ? 'Editar Anime' : 'Adicionar Novo Anime'}</h1>
+            <p>Preencha os campos abaixo para {id ? 'atualizar' : 'adicionar'} o anime</p>
+          </div>
+
+          {error && <div className="alert alert-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="anime-form">
           <div className="form-row">
@@ -265,6 +283,7 @@ const AnimeForm = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
