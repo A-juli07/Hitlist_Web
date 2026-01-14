@@ -1,6 +1,7 @@
 # Hitlist Anime
 
 Sistema completo de avaliação e discussão de animes.
+Link para a apresentação do projeto : https://drive.google.com/file/d/1N4MYclE4aMw6hx2U7ohbvkMXzgCD9cM6/view?usp=sharing
 
 ## Funcionalidades
 
