@@ -1,11 +1,26 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiLogOut, FiHome, FiPlusCircle } from 'react-icons/fi';
+import { FiUser, FiLogOut, FiHome, FiPlusCircle, FiGrid, FiChevronDown } from 'react-icons/fi';
+import { useState } from 'react';
 import './Navbar.css';
+
+const categories = [
+  'Ação',
+  'Romance',
+  'Comédia',
+  'Drama',
+  'Fantasia',
+  'Ficção Científica',
+  'Terror',
+  'Slice of Life',
+  'Esporte',
+  'Aventura'
+];
 
 const Navbar = () => {
   const { user, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
+  const [showCategories, setShowCategories] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -27,6 +42,36 @@ const Navbar = () => {
           <Link to="/" className="nav-link">
             <FiHome /> Início
           </Link>
+
+          <div className="categories-dropdown">
+            <button
+              className="nav-link categories-btn"
+              onClick={() => setShowCategories(!showCategories)}
+            >
+              <FiGrid /> Categorias <FiChevronDown className={`chevron ${showCategories ? 'open' : ''}`} />
+            </button>
+
+            {showCategories && (
+              <>
+                <div
+                  className="dropdown-overlay"
+                  onClick={() => setShowCategories(false)}
+                />
+                <div className="dropdown-menu">
+                  {categories.map((category) => (
+                    <Link
+                      key={category}
+                      to={`/category/${category}`}
+                      className="dropdown-item"
+                      onClick={() => setShowCategories(false)}
+                    >
+                      {category}
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
 
           {user ? (
             <>
