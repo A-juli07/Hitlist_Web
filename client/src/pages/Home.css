@@ -132,6 +132,107 @@
   font-size: 18px;
 }
 
+.not-found-section {
+  padding: 40px 0;
+}
+
+.not-found-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+  border: 2px solid var(--bg-tertiary);
+}
+
+.not-found-icon {
+  font-size: 80px;
+  color: var(--orange-primary);
+  margin-bottom: 24px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.not-found-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.not-found-text {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.not-found-suggestion {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.request-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.request-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 112, 67, 0.4);
+}
+
+.request-message {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.request-message.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.request-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 60px 0;
@@ -168,6 +269,31 @@
 
   .category-btn {
     padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .not-found-card {
+    padding: 40px 24px;
+  }
+
+  .not-found-icon {
+    font-size: 60px;
+  }
+
+  .not-found-title {
+    font-size: 24px;
+  }
+
+  .not-found-text {
+    font-size: 16px;
+  }
+
+  .not-found-suggestion {
+    font-size: 14px;
+  }
+
+  .request-btn {
+    padding: 12px 20px;
     font-size: 14px;
   }
 }

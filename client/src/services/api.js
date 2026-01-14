@@ -53,4 +53,13 @@ export const authService = {
   updateProfile: (data) => api.put('/auth/profile', data),
 };
 
+export const animeRequestService = {
+  create: (animeName, userEmail, userName) =>
+    api.post('/anime-requests', { animeName, userEmail, userName }),
+  getAll: (params) => api.get('/anime-requests', { params }),
+  updateStatus: (id, status, adminNotes) =>
+    api.put(`/anime-requests/${id}`, { status, adminNotes }),
+  delete: (id) => api.delete(`/anime-requests/${id}`),
+};
+
 export default api;
