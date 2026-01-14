@@ -18,11 +18,10 @@ const animeSchema = new mongoose.Schema({
   category: {
     type: String,
     required: [true, 'Categoria é obrigatória'],
-    enum: ['Ação', 'Aventura', 'Comédia', 'Drama', 'Fantasia', 'Romance', 'Suspense', 'Ficção Científica']
+    enum: ['Ação', 'Romance', 'Comédia', 'Drama', 'Fantasia', 'Ficção Científica', 'Terror', 'Slice of Life', 'Esporte', 'Aventura']
   },
   genres: [{
-    type: String,
-    required: true
+    type: String
   }],
   releaseYear: {
     type: Number,
@@ -30,12 +29,12 @@ const animeSchema = new mongoose.Schema({
   },
   episodes: {
     type: Number,
-    required: [true, 'Número de episódios é obrigatório']
+    default: 0
   },
   status: {
     type: String,
-    enum: ['Em andamento', 'Concluído', 'Cancelado'],
-    default: 'Em andamento'
+    enum: ['Em Lançamento', 'Finalizado', 'Em Breve'],
+    default: 'Em Lançamento'
   },
   studio: String,
   averageRating: {
