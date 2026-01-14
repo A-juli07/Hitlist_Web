@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiLogOut, FiHome, FiPlusCircle, FiGrid, FiChevronDown, FiBell } from 'react-icons/fi';
+import { FiUser, FiLogOut, FiHome, FiPlusCircle, FiGrid, FiChevronDown, FiBell, FiMenu, FiX } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import { animeRequestService } from '../services/api';
 import './Navbar.css';
@@ -22,6 +22,7 @@ const Navbar = () => {
   const { user, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
   const [showCategories, setShowCategories] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [pendingRequestsCount, setPendingRequestsCount] = useState(0);
 
   useEffect(() => {
@@ -58,9 +59,17 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <div className="navbar-links">
-          <Link to="/" className="nav-link">
-            <FiHome /> Início
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          aria-label="Toggle menu"
+        >
+          {showMobileMenu ? <FiX /> : <FiMenu />}
+        </button>
+
+        <div className={`navbar-links ${showMobileMenu ? 'mobile-active' : ''}`}>
+          <Link to="/" className="nav-link" onClick={() => setShowMobileMenu(false)}>
+            <FiHome /> <span>Início</span>
           </Link>
 
           <div className="categories-dropdown">
@@ -68,7 +77,7 @@ const Navbar = () => {
               className="nav-link categories-btn"
               onClick={() => setShowCategories(!showCategories)}
             >
-              <FiGrid /> Categorias <FiChevronDown className={`chevron ${showCategories ? 'open' : ''}`} />
+              <FiGrid /> <span>Categorias</span> <FiChevronDown className={`chevron ${showCategories ? 'open' : ''}`} />
             </button>
 
             {showCategories && (
@@ -83,7 +92,10 @@ const Navbar = () => {
                       key={category}
                       to={`/category/${category}`}
                       className="dropdown-item"
-                      onClick={() => setShowCategories(false)}
+                      onClick={() => {
+                        setShowCategories(false);
+                        setShowMobileMenu(false);
+                      }}
                     >
                       {category}
                     </Link>
@@ -97,30 +109,30 @@ const Navbar = () => {
             <>
               {isAdmin && (
                 <>
-                  <Link to="/admin/animes/new" className="nav-link">
-                    <FiPlusCircle /> Adicionar Anime
+                  <Link to="/admin/animes/new" className="nav-link" onClick={() => setShowMobileMenu(false)}>
+                    <FiPlusCircle /> <span>Adicionar Anime</span>
                   </Link>
-                  <Link to="/admin/requests" className="nav-link notification-link">
-                    <FiBell /> Solicitações
+                  <Link to="/admin/requests" className="nav-link notification-link" onClick={() => setShowMobileMenu(false)}>
+                    <FiBell /> <span>Solicitações</span>
                     {pendingRequestsCount > 0 && (
                       <span className="notification-badge">{pendingRequestsCount}</span>
                     )}
                   </Link>
                 </>
               )}
-              <Link to="/profile" className="nav-link">
-                <FiUser /> {user.username}
+              <Link to="/profile" className="nav-link" onClick={() => setShowMobileMenu(false)}>
+                <FiUser /> <span>{user.username}</span>
               </Link>
-              <button onClick={handleLogout} className="nav-link btn-logout">
-                <FiLogOut /> Sair
+              <button onClick={() => { handleLogout(); setShowMobileMenu(false); }} className="nav-link btn-logout">
+                <FiLogOut /> <span>Sair</span>
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-outline">
+              <Link to="/login" className="btn btn-outline" onClick={() => setShowMobileMenu(false)}>
                 Entrar
               </Link>
-              <Link to="/register" className="btn btn-primary">
+              <Link to="/register" className="btn btn-primary" onClick={() => setShowMobileMenu(false)}>
                 Cadastrar
               </Link>
             </>
